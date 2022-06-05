@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3897d118-1b28-4ac9-8f15-2796da168590" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<configuration doc:name="Configuration" doc:id="89267c60-6b58-4cc3-8f68-b625790f58ee" defaultErrorHandler-ref="processorlevelerrorhandling6Error_Handler" />
+	<error-handler name="processorlevelerrorhandling6Error_Handler" doc:id="d402ce2c-11ea-4983-8495-05e3918976cb" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b2de9a40-4bec-4d3d-8763-4cd72df4853a" >
+			<logger level="INFO" doc:name="Logger" doc:id="5cdd7264-0e1e-414e-a462-ff5e1a8d2d18" />
+			<logger level="INFO" doc:name="Logger" doc:id="c02f5cd9-d21d-4a01-be16-9a5af6c0bcdd" />
+			<set-payload value="tiger bhai" doc:name="Set Payload" doc:id="37f01f7c-760d-4a68-b070-b27b9e33cd4f" />
+			<logger level="INFO" doc:name="Logger" doc:id="eb6dbf65-07ca-40ec-b99b-094ee7feba6f" />
+		</on-error-continue>
+	</error-handler>
+	<flow name="processorlevelerrorhandling6Flow" doc:id="b66069f1-9d77-472e-b3c5-0b1c31270ab0" >
+		<http:listener doc:name="Listener" doc:id="21810dd7-f62a-489a-a881-e01b99ad75e2" config-ref="HTTP_Listener_config" path="/test"/>
+		<logger level="INFO" doc:name="Logger" doc:id="eb794814-267b-44fc-a542-14be747c2f5f" message="start flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2d6fe809-88f6-4dd7-8e37-9ed65824438f" />
+		<validation:is-null doc:id="f42f861c-6082-4e3d-a026-5bbead127cda" value="#[payload]"/>
+		<set-payload value="azirul bhai" doc:name="Set Payload" doc:id="ba9761b6-e73d-4302-a9f9-d44bb7aab01b" />
+		<logger level="INFO" doc:name="Logger" doc:id="cd488512-11da-4292-b7db-5fcad206ee65" />
+		<set-payload value="shadab sir" doc:name="Set Payload" doc:id="c3e2f5ed-ab97-494f-981d-6977be307fc5" />
+		<logger level="INFO" doc:name="Logger" doc:id="32ff9ffb-55c1-4d45-bba7-504a3d43ed40" message="end flow"/>
+	</flow>
+</mule>
